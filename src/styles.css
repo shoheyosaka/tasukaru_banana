@@ -1,0 +1,54 @@
+@import "tailwindcss" source(none);
+@source "./index.html";
+@source "./main.js";
+@theme {
+  --font-sans: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+}
+
+/* ---- バナナの動き ---- */
+@keyframes banana-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(6deg); }
+}
+@keyframes banana-swing {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-14deg); }
+  75% { transform: rotate(14deg); }
+}
+@keyframes banana-scroll {
+  from { background-position-x: 0; }
+  to { background-position-x: 56px; }
+}
+.banana-float { animation: banana-float 7s ease-in-out infinite; }
+.banana-float:nth-of-type(2n) { animation-duration: 9s; animation-delay: -3s; }
+.banana-stripe { animation: banana-scroll 4s linear infinite; }
+.is-visible .banana-swing { animation: banana-swing 1s ease-in-out 0.4s 2; }
+
+/* ---- スクロールでふわっと表示 ---- */
+.js main section:not(#top) > .relative.z-10 > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.js main section:not(#top) > .relative.z-10 > .is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banana-float, .banana-stripe, .banana-swing { animation: none !important; }
+  .js main section:not(#top) > .relative.z-10 > * { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---- バナナのイラストを黄色系に ---- */
+img[src$="banana-mark.png"]:not([rel]) { filter: sepia(1) saturate(6) hue-rotate(-8deg) brightness(1.05); }
+.banana-stripe:not(.invert) { filter: sepia(1) saturate(6) hue-rotate(-8deg); }
+
+/* ---- バナ助くん ---- */
+@keyframes banasuke-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-3deg); }
+}
+.banasuke { animation: banasuke-bob 3.2s ease-in-out infinite; transform-origin: 50% 100%; }
+@media (prefers-reduced-motion: reduce) { .banasuke { animation: none; } }
+

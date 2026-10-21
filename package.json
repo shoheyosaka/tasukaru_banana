@@ -1,0 +1,17 @@
+{
+  "name": "tasukaru-banana",
+  "private": true,
+  "description": "たすかるバナナ（エアコン・ハウスクリーニング）のホームページ",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.1.11",
+    "tailwindcss": "4.1.11"
+  }
+}
