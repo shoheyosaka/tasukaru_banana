@@ -2,9 +2,10 @@
 //
 //   npm run build  … dist/ を作り直す
 //   npm run dev    … ファイルを保存するたびに dist/ を作り直す
+//   --drafts を付けると、案A〜C（drafts/）も dist/ に入れる（本番には入れない）
 //
 // 最終案は src/ のソースから、CSS と JS を埋め込んだ 1 枚の index.html を作る。
-// 案A〜C（drafts/）と画像（assets/）はそのままコピーする。
+// 画像（assets/）はそのままコピーする。
 import { spawnSync } from "node:child_process"
 import { cpSync, mkdirSync, readFileSync, rmSync, watch, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
@@ -46,7 +47,7 @@ function build() {
   mkdirSync(dist, { recursive: true })
   writeFileSync(join(dist, "index.html"), html)
   cpSync(join(root, "assets"), join(dist, "assets"), { recursive: true })
-  cpSync(join(root, "drafts"), dist, { recursive: true })
+  if (process.argv.includes("--drafts")) cpSync(join(root, "drafts"), dist, { recursive: true })
 
   console.log(`dist/ を作成しました（${Date.now() - started}ms）`)
 }

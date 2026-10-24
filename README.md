@@ -3,7 +3,7 @@
 たすかるバナナ（エアコン・ハウスクリーニング）のホームページです。
 
 - 最終案（`src/`）が公開するページです。CSS と JavaScript を埋め込んだ 1 枚の `index.html` にビルドします
-- 案A〜C（`drafts/`）は検討用に残しているデザイン案です。最終案からのリンクはなく、`a.html`・`b.html`・`c.html` を直接開いて見ます
+- 案A〜C（`drafts/`）は検討用に残しているデザイン案です。本番には公開しません。見るときは `node scripts/build.mjs --drafts` でビルドし、`dist/a.html` などを開きます
 - もとは Figma Make で作成したデザイン（React）を、HTML / CSS / JavaScript で書き直したものです
 
 ## フォルダ構成
@@ -14,7 +14,7 @@ src/                 最終案のソース（ここを編集する）
   styles.css         Tailwind CSS の設定と独自の CSS（アニメーションなど）
   main.js            メニュー開閉・よくある質問・スクロール表示
 assets/              画像（最終案・案A〜Cで共通）
-drafts/              案A〜C（完成品。ビルドせずそのままコピーする）
+drafts/              案A〜C（記録用。--drafts を付けたときだけ dist/ にコピーする）
 scripts/build.mjs    dist/ を作るスクリプト
 dist/                公開用ファイル（ビルドで生成。git には含めない）
 ```
@@ -54,22 +54,11 @@ npm run dev
 
 ## 公開
 
-ビルドコマンドは `npm run build`、公開するフォルダは `dist` です。
-
-### GitHub Pages（確認用）
-
-`main` に push すると、GitHub Actions（`.github/workflows/pages.yml`）がビルドして公開します。
-
-- 初回だけ、リポジトリの Settings → Pages → Source を「GitHub Actions」に変更してください
-- 公開先：https://shoheyosaka.github.io/tasukaru_banana/
-
-### Cloudflare Pages（本番・予定）
-
-Cloudflare Pages でこのリポジトリを接続し、次のように設定します。
+お客様の Cloudflare アカウントの Cloudflare Pages（プロジェクト名 `tasukaru-banana`）で公開しています。
 
 - Build command：`npm run build`
 - Build output directory：`dist`
+- Production branch：`main`
+- 公開先：https://tasukaru-banana.pages.dev （独自ドメインは設定予定）
 
-## 公開前に差し替えるもの
-
-- `<meta name="robots" content="noindex">`（検索エンジンに載せない設定）を外す
+`main` に push すると本番に反映されます。修正は作業用のブランチで行い、push すると Cloudflare が確認用の URL を作るので、お客様に OK をもらってから `main` にマージします。
