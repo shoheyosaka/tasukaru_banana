@@ -14,6 +14,7 @@ src/                 最終案のソース（ここを編集する）
   styles.css         Tailwind CSS の設定と独自の CSS（アニメーションなど）
   main.js            メニュー開閉・よくある質問・スクロール表示
 assets/              画像（最終案・案A〜Cで共通）
+public/              robots.txt・sitemap.xml・404.html（そのまま dist/ の直下にコピーする）
 drafts/              案A〜C（記録用。--drafts を付けたときだけ dist/ にコピーする）
 scripts/build.mjs    dist/ を作るスクリプト
 dist/                公開用ファイル（ビルドで生成。git には含めない）
